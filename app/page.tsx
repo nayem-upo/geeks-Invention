@@ -43,13 +43,18 @@ export default function Home() {
     setHeaderBackgroundColor(sectionColors[currentSection]);
   }, [currentSection]);
 
-  window.addEventListener('scroll', () => {
-    const scrollPosition = window.scrollY;
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      window.addEventListener('scroll', () => {
+        const scrollPosition = window.scrollY;
 
-    const sectionIndex = Math.floor(scrollPosition / window.innerHeight);
+        const sectionIndex = Math.floor(scrollPosition / window.innerHeight);
 
-    setHeaderBackgroundColor(headerColers[sectionIndex]);
-  });
+        setHeaderBackgroundColor(headerColers[sectionIndex]);
+      });
+    }
+  }, []);
+
   return (
     <main className={`${sectionColors[currentSection]} min-h-screen max-w-7xl mx-auto duration-500`}>
       <Header headerBackgroundColor={headerBackgroundColor} />
